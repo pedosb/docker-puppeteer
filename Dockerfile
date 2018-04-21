@@ -8,9 +8,14 @@ libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss
 fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget && \
 wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb && \
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &&\
+sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
+apt-get update && \
+apt-get install -yq google-chrome-beta && \
 dpkg -i dumb-init_*.deb && rm -f dumb-init_*.deb && \
 apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 RUN yarn global add puppeteer@1.3.0 && yarn cache clean
 
 ENV NODE_PATH="/usr/local/share/.config/yarn/global/node_modules:${NODE_PATH}"
