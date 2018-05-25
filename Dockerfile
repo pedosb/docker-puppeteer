@@ -16,7 +16,7 @@ dpkg -i dumb-init_*.deb && rm -f dumb-init_*.deb && \
 apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
-RUN yarn global add puppeteer@1.3.0 && yarn cache clean
+RUN yarn global add puppeteer@1.3.0 mongodb assert && yarn cache clean
 
 ENV NODE_PATH="/usr/local/share/.config/yarn/global/node_modules:${NODE_PATH}"
 
